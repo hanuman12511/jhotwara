@@ -1,10 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { useEffect, useState } from 'react'
-import {Text,View,StyleSheet, Image,Animated,  TouchableOpacity, FlatList,} from 'react-native'
+import {Text,View,StyleSheet, Image,Animated,  TouchableOpacity, FlatList} from 'react-native'
 import bikelogo from '../assets/logo.png'
 import About from '../screen/About';
 import {bike} from '../data/data'
 import {Linking} from 'react-native'
+import HomeScreen from '../screen/HomeScreen';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -67,7 +68,7 @@ function Tab() {
       }).start();
       setBikemodel("")
   }
-  function HomeScreen(){
+  function HomeScreen1(){
   
 
     return(
@@ -97,7 +98,7 @@ function Tab() {
     return(
     <TouchableOpacity  onPress={()=>startAnimation1(item.item)}>
     <View style={ styles.bikeshow1}> 
-    <Image source={item.item.img} style={{width:30,height:30}}/>
+    <Image source={item.item.img} style={{width:100,height:100}}/>
         <Text>{item.item.name}</Text>
     </View>
     </TouchableOpacity>
@@ -128,7 +129,9 @@ function Tab() {
       <BottomTab.Screen name="Home" component={HomeScreen}  options={{
           tabBarLabel: 'Home',
           tabBarIcon:()=>(
-           <View style={{backgroundColor:'red',width:20,height:30}}></View>
+           <View style={{backgroundColor:'red',width:20,height:30}}>
+             <Image source={require('../assets/logo/icons8-home-100.png')} style={styles.tablogo}/>
+           </View>
           )
           
         }}/>
@@ -150,7 +153,9 @@ function Tab() {
          <BottomTab.Screen name="add" component={About}  options={{
           tabBarLabel: 'Add',
           tabBarIcon:()=>(
-            <View style={{backgroundColor:'red',width:20,height:30}}></View>
+            <View style={{backgroundColor:'red',width:20,height:30}}>
+              <Image source={bikelogo} style={styles.tablogo}/>
+            </View>
           )
           
         }}/>
@@ -170,7 +175,7 @@ function Tab() {
           data={bikeinfo}
           renderItem={renderitem}
           keyExtractor={index=>index.id}
-          numColumns={3}
+        
         />
       </View>
     </Animated.View>
@@ -188,7 +193,7 @@ function Tab() {
           data={bikemodel}
           renderItem={renderitem}
           keyExtractor={index=>index.id}
-          numColumns={3}
+    
 
         />
       </View>
@@ -217,6 +222,11 @@ const styles=StyleSheet.create({
       justifyContent:'space-between',
   },
   bikelogo:{width:50,height:40
+  },
+
+  tablogo:{
+    width:50,
+    height:40
   },
   bikeshow:{
       width:'100%',

@@ -1,9 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Text,View,StyleSheet, Image,Animated,  TouchableOpacity,} from 'react-native'
  import bikelogo from '../assets/logo.png'
+ import { setColor } from '../Store/colorSlice';
+ import{UseDispatch ,useDispatch,useSelector} from 'react-redux'
 export default function HomeScreen(){
+    const dispatch = useDispatch()
+    const color = useSelector((state)=>state.color.value)
     const [animation] = useState(new Animated.Value(0));
 
+    console.log(color);
+    
+    useEffect(()=>{
+        dispatch(setColor())
+    },[])
     const startAnimation = () => {
         Animated.timing(animation, {
           toValue: 1,
@@ -25,8 +34,8 @@ export default function HomeScreen(){
       }
     return(
         <View style={styles.mainview}>
-            <View style={styles.header}>
-                    <Text>{'bike'}</Text>
+            <View style={[styles.header]}>
+                    <Text style={{}}>{'bike'}</Text>
                     
                     <TouchableOpacity onPress={startAnimation}>
                     <Image source={bikelogo} style={styles.bikelogo}/>
